@@ -9,14 +9,12 @@ import (
 	"strings"
 )
 
-const inputFilePath = "messages.txt"
-
 const port = ":42069"
 
 func main() {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
-		log.Fatalf("could not listen: ", err)
+		log.Fatal("could not listen: ", err)
 	}
 	defer lis.Close()
 
@@ -24,7 +22,7 @@ func main() {
 	for {
 		conn, err := lis.Accept()
 		if err != nil {
-			log.Fatalf("error accepting: ", err)
+			log.Fatal("error accepting: ", err)
 		}
 		fmt.Println("accepted conn from: ", conn.RemoteAddr())
 		linesChan := getLinesChannel(conn)
